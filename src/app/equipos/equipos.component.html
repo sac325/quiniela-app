@@ -1,0 +1,18 @@
+<p>equipos works!</p>
+
+<div>
+    <div class="row">
+        <div class="col-12">
+            <h1>Equipos</h1>
+        </div>
+        <div *ngFor="let equipo of equipos" class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{equipo.nombre}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{equipo.filename}}</h6>
+                    <a href="#" class="card-link">Card link</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
