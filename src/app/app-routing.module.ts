@@ -5,11 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EquiposComponent } from './equipos/equipos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './usuarios/login.component';
 
 const appRoutes: Routes = [
   { path: 'equipos', component: EquiposComponent },
+  { path: 'login', component: LoginComponent },
   { path: '',   redirectTo: '/', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 
