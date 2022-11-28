@@ -1,0 +1,15 @@
+<div>
+    <div><span>{{titulo}}</span></div>
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <input type="hidden" formControlName="id" />
+        <label for="nombre">Equipo (Pais)</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" autofocus required>
+    </div>
+    <div class="form-group">
+        <label for="imagen">Imagen (Bandera)</label>
+        <input type="text" class="form-control" id="imagen" formControlName="imagen" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

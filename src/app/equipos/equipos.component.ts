@@ -19,11 +19,8 @@ export class EquiposComponent implements OnInit {
   }
 
   getTeams(){
-    return this.restService.getTeams('http://localhost:8090/api/equipos/listar').subscribe(data => {
-
-
+    return this.restService.get('http://localhost:8090/api/equipos/listar').subscribe(data => {
       this.equipos = data;
-
       console.log(this.equipos);
     }
     );

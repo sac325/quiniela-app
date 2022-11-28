@@ -8,7 +8,7 @@ export class RestService {
 
   constructor(private http:HttpClient) { }
 
-  getTeams(url:string){
+  get(url:string){
     return this.http.get(url);
   }
   // error 401 redirect function

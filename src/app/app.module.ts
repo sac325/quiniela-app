@@ -10,6 +10,9 @@ import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './usuarios/login.component';
+import { FormComponent } from './equipos/form.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -19,9 +22,11 @@ import { LoginComponent } from './usuarios/login.component';
     HeadComponent,
     FooterComponent,
     PageNotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    FormComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
