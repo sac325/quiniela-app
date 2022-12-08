@@ -1,3 +1,8 @@
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary" [routerLink]="['/equipos/form']">Agregar Equipo</button>
+</div>
+
+
 <div>
     <div class="row">
         <div class="col-12">
@@ -8,7 +13,8 @@
                 <div class="card-body">
                     <h5 class="card-title">{{equipo.nombre}}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{equipo.filename}}</h6>
-                    <a href="#" class="card-link">Card link</a>
+                    <button type="button" class="btn btn-primary" [routerLink]="['/equipos/form', equipo.id]">Editar</button>
+                    <button type="button" class="btn btn-danger" (click)="delete(equipo.id)">Eliminar</button>
                     </div>
             </div>
         </div>

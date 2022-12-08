@@ -1,15 +1,37 @@
 <div>
     <div><span>{{titulo}}</span></div>
 </div>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <input type="hidden" formControlName="id" />
-        <label for="nombre">Equipo (Pais)</label>
-        <input type="text" class="form-control" id="nombre" formControlName="nombre" autofocus required>
+
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 400px;">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{titulo}}</h5>
+<form   class="form-group">
+    <div>
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="hidden" id="id" name="id" [(ngModel)]="equipo.id" />
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="equipo.nombre" class ="form-control" />
     </div>
-    <div class="form-group">
-        <label for="imagen">Imagen (Bandera)</label>
-        <input type="text" class="form-control" id="imagen" formControlName="imagen" required>
+    <div>
+        <label for="description" class="form-label">Description</label>
+        <input type="text" id="description" name="description" [(ngModel)]="equipo.description" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div>
+        <label for="conferencia" class ="form-label">Conferencia</label>
+        <input type="file" id="imagen" name="imagen"  class="form-control" />
+    </div>
+    <div>
+        <button role="button" class="btn btn-primary" *ngIf="!equipo.id" (click)="create()">Guardar</button>
+        <button role="button" class="btn btn-primary" *ngIf="equipo.id" (click)="update()">Actualizar</button>
+    </div>
 </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="d-flex justify-content-center">
+    <img src="assets/images/teams/" alt="imagen" width="200px" height="200px">
+
+</div> -->

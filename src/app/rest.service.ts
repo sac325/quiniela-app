@@ -21,4 +21,9 @@ export class RestService {
     return false;
   }
 
+  //delete function
+  delete(url:string){
+    return this.http.delete(url);
+  }
+
 }
