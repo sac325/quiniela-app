@@ -16,6 +16,7 @@ import swal from 'sweetalert2';
 export class EquiposComponent implements OnInit {
 
   public equipos: any = [];
+  public url = 'http://localhost:8090/api/equipos/listar/page/';
 
   
   //add httpheaders content type application/json
@@ -27,17 +28,16 @@ export class EquiposComponent implements OnInit {
     this.getTeams();
   }
 
-  getTeams(){
-    return this.restService.get('http://localhost:8090/api/equipos/listar').subscribe(data => {
-      this.equipos = data;
-      console.log(this.equipos);
-
-    }
+  getTeams(Page: number = 0): void {
+    this.restService.get(this.url + Page).subscribe(
+      (response: any) =>{
+        this.equipos = response.content;
+      }
     );
-          /* return this.restService.get(this.listarUrl).pipe(map((data) => data as Equipo[]));  */
   }
-
-  // create delete function get id and delete equipo by id sweetalert2 confirm
+  
+ 
+  //create function delete get id
   delete(id: number): void {
     swal.fire({
       title: 'Estas seguro?',

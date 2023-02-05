@@ -5,6 +5,8 @@ import { catchError, map } from 'rxjs/operators';
 import { Equipo } from './equipo';
 import { of } from 'rxjs';
 import { Router } from '@angular/router';
+import swal from 'sweetalert2';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +18,56 @@ export class EquiposService {
   private urlEndPointE: string = 'http://localhost:8090/api/equipos/editar';
   private urlEndPointD: string = 'http://localhost:8090/api/equipos/eliminar';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private router: Router) { }
 
+  private isNoAutorizado(e): boolean {
+    if (e.status == 401 || e.status == 403) {
+      this.router.navigate(['/login']);
+      return true;
+    }
+
+    return false;
+  }
 
   create(equipo: Equipo): Observable<Equipo> {
-    return this.http.post<Equipo>(this.urlEndPoint, equipo , { headers: this.httpHeaders });
+    return this.http.post<Equipo>(this.urlEndPoint, equipo , { headers: this.httpHeaders })
+      .pipe(
+        catchError(e => {
+          if (this.isNoAutorizado(e)) {
+            return throwError(() => new Error(e.error.mensaje));
+          }
+          if (e.status == 400) {
+            return throwError(() => new Error(e.error.mensaje));
+          }
+          console.error(e.error.mensaje);
+          swal.fire('Error al crear el equipo', e.error.mensaje, 'error');
+          return throwError(() => new Error(e.error.mensaje));
+        }
+        )
+      );
+
 
   }
 
   //create function get Equipo by id observable and Equipo class
   getEquipo(id): Observable<Equipo> {
-    return this.http.get<Equipo>(`${this.urlEndPointL}/${id}`);
+//returm client get urlEndPointL and id manage error sweetalert2 json errorn and message
+    return this.http.get<Equipo>(`${this.urlEndPointL}/${id}`).pipe(
+      catchError(e => {
+        //navigate to equipos
+        this.router.navigate(['/equipos']);
+        console.error(e.error.mensaje);
+        swal.fire('Error al editar', e.error.mensaje, 'error');
+        // pass a factory function to `throwError(() => new Error('test'))`
+        return throwError(() => new Error(e.error.mensaje));
+      })
+    );
+    //    return this.http.get<Equipo>(`${this.urlEndPointL}/${id}`);
   }
+  
+    
+
+  
 
   // create function updateEquipo observable and Equipo class
   updateEquipo(equipo: Equipo): Observable<Equipo> {
